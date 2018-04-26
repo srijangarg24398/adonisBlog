@@ -1,0 +1,23 @@
+@layout('main')
+
+@section('content')
+	<a href="/posts" class="btn btn-primary">Go Back</a>
+	@if(old('notification'))
+		<span class="alert alert-success flex-lg-wrap flex-wrap text-center">
+			{{ old('notification') }}
+		</span>
+	@endif
+	<span class="btn-group float-right">
+		<a class="btn btn-dark d-block" href="/posts/edit/{{post.id}}">Edit</a>
+		<form action="{{ '/posts/'+post.id+'?_method=DELETE' }}" method="POST">
+			{{ csrfField() }}
+			<button class="btn btn-danger d-block">Delete</button>
+		</form>
+	</span>
+	<hr>
+	<h1>{{ post.title }}</h1>
+	<p>{{post.body}}</p>
+	<p>{{post.created_at}}</p>
+	<p>{{post.updated_at}}</p>
+	<hr>
+@endsection
